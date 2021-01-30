@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Slot Machine</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+  <div class="game_container">
+    <div class="mask">
+      <div class="slots"></div>
+    </div>
+    <div class="label">$$$</div>
+    <div class="btn_container">
+      <div class="spin_btn">
+        <img src="img/btn-hover.png" />
+        <img id="btnHover" src="img/btn-normal.png" />
+      </div>
+    </div>
+    
+  </div>
+  <video src="./img/lasvegas1.mp4" onloadedmetadata="this.muted = true" playsinline autoplay muted loop></video>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script>
+    $(document).ready(function () {
+      $(".game_container").hide()
+      setTimeout(() => {
+        $("video").fadeOut(2000)
+        $(".game_container").fadeIn(3000)
+      },  3000);
+       
+      var slots = $(".slots")
+      for (var i = 0; i < 3; i++) {
+        slots.append("<div class='item'>")
+        for (var j = 0; j < 8; j++) {
+          slots.children().last().append("<div>")
+        }
+      }
+
+      var isAnimate = false,
+        win = true,
+        easy = [true, true, true, false],     //75%
+        normal = [true, true, false, false],  //50%
+        hard = [true, false, false, false],   //25%
+        level = hard,
+        randomNum,
+        winNums = [],
+        slotsItem = $(".slots .item"),
+        // allImages = ["asian-1", "asian-2", "asian-3", "asian-4", "asian-5", "blonde-1", "blonde-2", "blonde-3", "blonde-4", "brunettes-1", "brunettes-2", "brunettes-3", "busty-1", "busty-2", "busty-3", "teens-1", "teens-2", "teens-3"],
+        allImages = ["img1-1", "img2-2", "img3-3", "img4-4", "img5-5", "img6-6", "img7-7", "img8-8", "img9-9", "img10-10", "img11-11", "img12-12", "img13-13", "img14-14", "img15-15", "img16-16", "img17-17", "img18-18",],
+        tempImages = allImages,
+        currentImages = [],
+        salute = $(".salute"),
+        ranNo = undefined,
+        itemNo = slotsItem.eq(0).children().length;
+
+      for (var i = 0; i < itemNo; i++) {
+        ranNo = Math.floor(Math.random() * tempImages.length)
+        currentImages.push(tempImages[ranNo])
+        tempImages.splice(ranNo, 1)
+      }
+
+      for (var i = 0; i < 3; i++) {
+        slotsItem = $(".slots .item")
+        for (var j = 0; j < itemNo; j++) {
+          slotsItem.eq(i).children().eq(j).css("background-image", "url(./img/" + currentImages[j] + ".jpg)")
+        }
+      }
+      $(".spin_btn").mousemove(function () {
+        $("#btnHover").addClass("hide");
+      })
+      $(".spin_btn").mouseout(function () {
+        $("#btnHover").removeClass("hide");
+      })
+      $(".spin_btn").on("click", function () {
+        if (!isAnimate) {
+          $(".spin_btn").children().last().css("display", "hidden")
+          ran = Math.random()
+          win = level[Math.floor(ran * 4)]
+          isAnimate = true
+          salute.removeClass("active");
+          $(this).addClass("active");
+          randomNum = Math.ceil(Math.random() * itemNo)
+
+          for (var i = 0; i < 3; i++) {
+            slotsItem.eq(i).removeClass('state' + winNums[i]);
+
+            if (win) winNums[i] = randomNum
+            else {//lose
+              winNums[i] = Math.ceil(Math.random() * itemNo)
+              if (winNums[0] == winNums[1] && winNums[0] == winNums[2]) {
+                winNums = [1, 2, 3]
+              }
+            }
+            winNums[i] = randomNum
+            slotsItem.eq(i).addClass("animate").addClass('state' + winNums[i]);
+          }
+          console.log(win, ran, 'winNums', winNums)
+
+          setTimeout(function () {
+            slotsItem.removeClass("animate");
+            isAnimate = false;
+            $(".spin_btn").removeClass("active");
+            if (winNums[0] == winNums[1] && winNums[0] == winNums[2]) {
+              name = currentImages[winNums[0] - 1]
+              console.log(name.split('-')[0])
+              $(".label").html(name.split('-')[0])
+            }
+          }, 8000);
+        }
+      });
+    });
+    //1
+    //2
+    //3
+    //4->7
+    //5=>8
+    //6=>6
+    //7->5
+    //8->4
+  </script>
+
+</body>
+
+</html>
