@@ -78,6 +78,7 @@
       })
       $(".spin_btn").on("click", function () {
         if (!isAnimate) {
+          $(".label").html("$$$")
           $(".spin_btn").children().last().css("display", "hidden")
           ran = Math.random()
           win = level[Math.floor(ran * 4)]
