@@ -12,6 +12,29 @@ background: url(./img/bg-edited.jpg) no-repeat;
 position: relative;
 height: 843px;
 }
+.winning{
+  position: absolute;
+  z-index: 100;
+  left: 4px;
+  width: 285px;
+  height: 400px;
+  background: url("./img/$$$.jpg");
+}
+.winningLabel{
+  text-transform: uppercase;
+    text-align: center;
+    color: #ccab44;
+    bottom: 0px;
+    position: absolute;
+    font-size: 50px;
+    font-family: system-ui;
+    font-weight: 600;
+    width: 1020px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.mask .winning:nth-child(2) {left: 347px;}
+.mask .winning:nth-child(3) {left: 690px;}
 .mask{/* background: #393ace63; */overflow: hidden;width: 971px;height: 396px;top: 217px;left: 269px;position: absolute;}
 .slots {left: -762px;transform: scale(4);position: absolute;}
 .item {width: 100px;height: 100px;transform-style: preserve-3d;transform-origin: 50px 50px -122px;position: relative;top: 37px;left: 214px;/* background: red; */}

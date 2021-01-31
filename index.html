@@ -7,13 +7,19 @@
   <link rel="stylesheet" href="./style.css">
 
 </head>
-
 <body>
   <div class="game_container">
     <div class="mask">
+      <div id="winning">
+      <img class="winning" src="./img/$$$.jpg"/>
+      <img class="winning" src="./img/$$$.jpg"/>
+      <img class="winning" src="./img/$$$.jpg"/>
+ 
+    </div>
       <div class="slots"></div>
     </div>
-    <div class="label">$$$</div>
+    <p class="winningLabel hide">MAKE $600,000 IN LESS THAN 12 MONTHS</p>
+    <div class="label"></div>
     <div class="btn_container">
       <div class="spin_btn">
         <img src="img/btn-hover.png" />
@@ -28,10 +34,11 @@
   <script>
     $(document).ready(function () {
       $(".game_container").hide()
+      $("#winning").hide()
       setTimeout(() => {
         $("video").fadeOut(2000)
         $(".game_container").fadeIn(3000)
-      },  3000);
+      },  1000);
        
       var slots = $(".slots")
       for (var i = 0; i < 3; i++) {
@@ -46,7 +53,7 @@
         easy = [true, true, true, false],     //75%
         normal = [true, true, false, false],  //50%
         hard = [true, false, false, false],   //25%
-        level = hard,
+        level = normal,
         randomNum,
         winNums = [],
         slotsItem = $(".slots .item"),
@@ -78,7 +85,8 @@
       })
       $(".spin_btn").on("click", function () {
         if (!isAnimate) {
-          $(".label").html("$$$")
+          $("#winning").hide()
+          $(".label").html("")
           $(".spin_btn").children().last().css("display", "hidden")
           ran = Math.random()
           win = level[Math.floor(ran * 4)]
@@ -110,19 +118,18 @@
               name = currentImages[winNums[0] - 1]
               console.log(name.split('-')[0])
               $(".label").html(name.split('-')[0])
+              $("#winning").fadeIn(2000)
             }
           }, 8000);
         }
       });
     });
-    //1
-    //2
-    //3
-    //4->7
-    //5=>8
-    //6=>6
-    //7->5
-    //8->4
+//the video runs for 13 seconds then fades to the slot site attached is the Blondes thats the first after 
+//the video then whatever you choose TEENS, BUSTY, ASIANS then the $$$ then see the attached 
+//WE TURN FANTASY INTO REALITY to include money@lasvegas.xxx just the words as I have not purchased the email yet.
+
+
+
   </script>
 
 </body>
