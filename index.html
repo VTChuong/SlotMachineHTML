@@ -60,8 +60,8 @@
         randomNum,
         winNums = [],
         slotsItem = $(".slots .item"),
-        // allImages = ["asian-1", "asian-2", "asian-3", "asian-4", "asian-5", "blonde-1", "blonde-2", "blonde-3", "blonde-4", "brunettes-1", "brunettes-2", "brunettes-3", "busty-1", "busty-2", "busty-3", "teens-1", "teens-2", "teens-3"],
-        allImages = ["img1-1", "img2-2", "img3-3", "img4-4", "img5-5", "img6-6", "img7-7", "img8-8", "img9-9", "img10-10", "img11-11", "img12-12", "img13-13", "img14-14", "img15-15", "img16-16", "img17-17", "img18-18",],
+        allImages = ["asian-1", "asian-2", "asian-3", "asian-4", "asian-5", "blonde-1", "blonde-2", "blonde-3", "blonde-4", "brunettes-1", "brunettes-2", "brunettes-3", "busty-1", "busty-2", "busty-3", "teens-1", "teens-2", "teens-3"],
+        // allImages = ["img1-1", "img2-2", "img3-3", "img4-4", "img5-5", "img6-6", "img7-7", "img8-8", "img9-9", "img10-10", "img11-11", "img12-12", "img13-13", "img14-14", "img15-15", "img16-16", "img17-17", "img18-18",],
         tempImages = allImages,
         currentImages = [],
         salute = $(".salute"),
@@ -83,12 +83,6 @@
           slotsItem.eq(i).children().eq(j).css("background-image", "url(./img/" + currentImages[j] + ".jpg)")
         }
       }
-      // $(".spin_btn").mousemove(function () {
-      //   $("#btnHover").addClass("hide");
-      // })
-      // $(".spin_btn").mouseout(function () {
-      //   $("#btnHover").removeClass("hide");
-      // })
       $(".spin_btn").on("click", function () {
         if (!isAnimate) {
           start.play()
