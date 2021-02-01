@@ -41,7 +41,7 @@
       setTimeout(() => {
         $("video").fadeOut(2000)
         $(".game_container").fadeIn(3000)
-      }, 13000);
+      }, 110);
 
       var slots = $(".slots")
       for (var i = 0; i < 3; i++) {
@@ -52,39 +52,59 @@
       }
 
       var isAnimate = false,
-        win = true,
-        easy = [true, true, true, false],     //75%
-        normal = [true, true, false, false],  //50%
-        hard = [true, false, false, false],   //25%
-        level = normal,
+        isWin = true,
+        level = 10, //60%
         randomNum,
         winNums = [],
         slotsItem = $(".slots .item"),
-        allImages = ["asian-1", "asian-2", "asian-3", "asian-4", "asian-5", "blonde-1", "blonde-2", "blonde-3", "blonde-4", "brunettes-1", "brunettes-2", "brunettes-3", "busty-1", "busty-2", "busty-3", "teens-1", "teens-2", "teens-3"],
+        allImages = [
+          ["asian-1", "asian-2", "asian-3", "asian-4", "asian-5"],
+          ["blonde-1", "blonde-2", "blonde-3", "blonde-4"],
+          ["brunettes-1", "brunettes-2", "brunettes-3"],
+          ["busty-1", "busty-2", "busty-3"],
+          ["teens-1", "teens-2", "teens-3"]],
         // allImages = ["img1-1", "img2-2", "img3-3", "img4-4", "img5-5", "img6-6", "img7-7", "img8-8", "img9-9", "img10-10", "img11-11", "img12-12", "img13-13", "img14-14", "img15-15", "img16-16", "img17-17", "img18-18",],
-        tempImages = allImages,
+        tempImages = allImages.slice(),
         currentImages = [],
         salute = $(".salute"),
-        ranNo = undefined,
+        wonKind = undefined,
         itemNo = slotsItem.eq(0).children().length,
-        start = new Audio("./audio/start.mp3")
-        lose = new Audio("./audio/lose.mp3")
+        start = new Audio("./audio/start.mp3"),
+        lose = new Audio("./audio/lose.mp3"),
         winAudio = new Audio("./audio/win.mp3")
 
-      for (var i = 0; i < itemNo; i++) {
-        ranNo = Math.floor(Math.random() * tempImages.length)
-        currentImages.push(tempImages[ranNo])
-        tempImages.splice(ranNo, 1)
-      }
-
-      for (var i = 0; i < 3; i++) {
-        slotsItem = $(".slots .item")
-        for (var j = 0; j < itemNo; j++) {
-          slotsItem.eq(i).children().eq(j).css("background-image", "url(./img/" + currentImages[j] + ".jpg)")
+      reset()
+      function reset() {
+        isWin = Math.floor(Math.random() * 10) < level ? true : false
+        currentImages = []
+        tempImages = allImages.slice()
+        if (isWin) {
+          for (i = tempImages.length-1; i >= 0; i--) {
+            wonKind = Math.floor(Math.random() * tempImages.length)
+            currentImages = currentImages.concat(tempImages.pop(wonKind))
+          }
+          currentImages = currentImages.slice(0,8)
         }
+        console.log("wonKind", wonKind, "currentImages", currentImages)
+
+        // tempImages = [].concat(allImages)
+        // for (var i = 0; i < itemNo; i++) {
+        //   ranNo = Math.floor(Math.random() * tempImages.length)
+        //   currentImages.push(tempImages[ranNo])
+        //   tempImages.splice(ranNo, 1)
+        // }
+
+        // for (var i = 0; i < 3; i++) {
+        //   slotsItem = $(".slots .item")
+        //   for (var j = 0; j < itemNo; j++) {
+        //     slotsItem.eq(i).children().eq(j).css("background-image", "url(./img/" + currentImages[j] + ".jpg)")
+        //   }
+        // }
+
       }
       $(".spin_btn").on("click", function () {
         if (!isAnimate) {
+          reset()
           start.play()
           $("#btnHover").addClass("hide");
           $(".winningContainer").hide()
@@ -93,30 +113,35 @@
           $(".label").html("")
           $(".spin_btn").children().last().css("display", "hidden")
           ran = Math.random()
-          win = level[Math.floor(ran * 4)]
+          isWin = Math.floor(ran * 10) < level ? true : false
           isAnimate = true
           salute.removeClass("active");
           $(this).addClass("active");
-          randomNum = Math.ceil(Math.random() * itemNo)
+          // randomNum = Math.ceil(Math.random() * itemNo)
+          winNums = getResult(currentImages, isWin)
+          isWin = winNums ? false : isWin
+          console.log(isWin, ran, 'winNums', winNums)
 
           for (var i = 0; i < 3; i++) {
             slotsItem.eq(i).removeClass('state' + winNums[i]);
 
-            if (win) winNums[i] = randomNum
-            else {//lose
-              winNums[i] = Math.ceil(Math.random() * itemNo)
-              if (winNums[0] == winNums[1] && winNums[0] == winNums[2]) {
-                winNums = [1, 2, 3]
-              }
-            }
+            // if (win) winNums[i] = randomNum
+            // else {//lose
+            //   winNums[i] = Math.ceil(Math.random() * itemNo)
+            //   if (winNums[0] == winNums[1] && winNums[0] == winNums[2]) {
+            //     winNums = [1, 2, 3]
+            //   }
+            // }
             // winNums[i] = randomNum
+
+
             slotsItem.eq(i).addClass("animate").addClass('state' + winNums[i]);
           }
-          console.log(win, ran, 'winNums', winNums)
+
 
           setTimeout(function () {
-            
-            if (winNums[0] == winNums[1] && winNums[0] == winNums[2]) {
+
+            if (isWin) {
               winAudio.play()
               name = currentImages[winNums[0] - 1]
               console.log(name.split('-')[0])
@@ -141,6 +166,40 @@
           }, 8000);
         }
       });
+
+      function getResult(currentImages) {
+        var compare = 0;
+        var mostFrequent;
+        var currentNames = []
+        var rs = []
+
+        for (var i = 0; i < currentImages.length; i++) {
+          var word = currentImages[i].split("-")[0];
+          currentNames.push(word)
+        }
+
+        for (var i = 0; i < currentNames.length; i++) {
+          rs.length = 0;
+          for (var j = 0; j < currentNames.length; j++) {
+            if (i == j) {
+              rs.push(j + 1)
+              continue
+            }
+
+            if (currentNames[i] == currentNames[j] && isWin) {
+              rs.push(j + 1)
+            } else if (!isWin && currentNames[i] != currentNames[j]) {
+              rs.push(j + 1)
+            }
+
+            if (rs.length >= 3) {
+              return (rs)
+              break
+            }
+          }
+        }
+        return null
+      }
     });
 //the video runs for 13 seconds then fades to the slot site attached is the Blondes thats the first after
 //the video then whatever you choose TEENS, BUSTY, ASIANS then the $$$ then see the attached 
