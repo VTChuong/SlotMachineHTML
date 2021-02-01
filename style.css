@@ -12,9 +12,14 @@ background: url(./img/bg-edited.jpg) no-repeat;
 position: relative;
 height: 843px;
 }
+.winningContainer{
+  z-index: 200;
+    position: absolute;
+    z-index: 200;
+
+}
 .winning{
   position: absolute;
-  z-index: 100;
   left: 4px;
   width: 285px;
   height: 400px;
@@ -155,7 +160,7 @@ transform: rotateX(-90deg) translate3d(0px, 122px, -244px);
   transform: rotateX(4320deg);
 }
 }
-.btn_container {background-color: #000;position: absolute;bottom: 190px;right: 222px;z-index: 2;}
+.btn_container {background-color: #000;position: absolute;bottom: 190px;right: 222px;z-index: 2;cursor: pointer;}
 .btn_container img{position: absolute;}
 video{
   z-index: 100;
@@ -178,4 +183,11 @@ video{
   font-family: system-ui;
   font-weight: 600;
   width: 245px;
+}
+.finalImage{
+  display: none;
+  position: absolute;
+  z-index: 999;
+  top: 215px;
+  left: 215px;
 }
