@@ -33,7 +33,21 @@ body  {
     top: -85px;
   }
 }
+@media screen and (max-width: 1024px) {
+  .game_container{
+    transform: translate(-50%, 0px) scale(.65);
+    left: 50%;
+    top: -146px;
+  }
+}
 @media screen and (max-width: 768px) {
+  .game_container{
+    transform: translate(-50%, 0px) scale(.5);
+    left: 50%;
+    top: -210px;
+  }
+}
+@media screen and (max-width: 736px) {
   .game_container{
     transform: translate(-50%, 0px) scale(.5);
     left: 50%;
