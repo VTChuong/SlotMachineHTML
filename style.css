@@ -55,8 +55,8 @@ body  {
 }
 .winning{
   position: absolute;
-  left: 4px;
-  width: 285px;
+  left: 0px;
+  width: 292px;
   height: 400px;
   background: url("./img/$$$.jpg");
 }
@@ -73,11 +73,11 @@ body  {
     left: 50%;
     transform: translateX(-50%);
 }
-.mask .winning:nth-child(2) {left: 347px;}
-.mask .winning:nth-child(3) {left: 690px;}
-.mask{/* background: #393ace63; */overflow: hidden;width: 971px;height: 396px;top: 217px;left: 269px;position: absolute;}
-.slots {left: -762px;transform: scale(4);position: absolute;}
-.item {width: 100px;height: 100px;transform-style: preserve-3d;transform-origin: 50px 50px -122px;position: relative;top: 37px;left: 214px;/* background: red; */}
+.mask .winning:nth-child(2) {left: 342px;}
+.mask .winning:nth-child(3) {left: 684px;}
+.mask{/* background: #393ace63; */overflow: hidden;width: 975px;height: 400px;top: 215px;left: 271px;position: absolute;}
+.slots {top: 2px;left: -762px;transform: scale(4.05);position: absolute;}
+.item {width: 104px;height: 101px;transform-style: preserve-3d;transform-origin: 50px 50px -122px;position: relative;top: 37px;left: 209px;/* background: red; */}
 .item.animate {
 animation-name: rotateAnim;
 animation-duration: 7s;
@@ -123,18 +123,10 @@ transform: rotateX(180deg);
 transition: transform 1s;
 transition-delay: 2s;
 }
-.item:nth-child(2) {position: absolute;left: 300px;animation-delay: 0.5s;}
-.item:nth-child(3) {position: absolute;left: 386px;animation-delay: 1s;}
-.item div {
-position: absolute;
-width: 100px;
-height: 100px;
-background-size: contain;
-background-position: center center;
-background-repeat: no-repeat;
-/* background-color: #fff;
-box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.5), inset 0px -1px 5px rgba(0, 0, 0, 0.5); */
-}
+.item:nth-child(2) {position: absolute;top: 37px;left: 294px;animation-delay: 0.5s;}
+.item:nth-child(3) {position: absolute;left: 378px;animation-delay: 1s;top: 37px;}
+.item div {position: absolute;width: 73px;height: 100px;background-size: contain;background-position: center center;background-repeat: no-repeat;/* background-color: #fff;
+box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.5), inset 0px -1px 5px rgba(0, 0, 0, 0.5); */left: 17px;}
 .item div:nth-child(2) {
 top: 100px;
 transform: rotateX(-45deg) translate3d(0px, 15px, -35px);

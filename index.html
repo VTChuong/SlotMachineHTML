@@ -75,6 +75,7 @@
         winAudio = new Audio("./audio/win.mp3"),
         stateNo = null
       reset()
+      $(".label").html(currentImages[0].split("-")[0])
       function reset() {
         isWin = Math.floor(Math.random() * 10) < level ? true : false
         currentImages = []
@@ -105,7 +106,7 @@
             }
           }
         }
-
+       
         setTimeout(() => { //change images
           for (var i = 0; i < 3; i++) {
             slotsItem = $(".slots .item")
