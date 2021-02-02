@@ -114,7 +114,7 @@
             }
           }
         }, 1000);
-        console.log(isWin,"winNums", winNums, "currentImages", currentImages)
+        console.log("win:",isWin,"winNums", winNums, "currentImages", currentImages)
       }
       $(".spin_btn").on("click", function () {
         if (!isAnimate) {
@@ -142,12 +142,10 @@
           }
 
           setTimeout(function () {
-
             if (isWin) {
               winAudio.play()
-              name = currentImages[winNums[0] - 1]
-              console.log(name.split('-')[0])
-              $(".label").html(name.split('-')[0])
+              name = currentImages[winNums[0] + 1].split('-')[0]
+              $(".label").html(name)
               $(".winningContainer").delay(1000).fadeIn(2000)
               $(".winningLabel").fadeIn(2000, function () {
                 $(".finalImage").delay(3000).fadeIn(2000)
