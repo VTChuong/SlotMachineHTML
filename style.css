@@ -4,6 +4,7 @@ body  {
   background-color: #000000;
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
+  overflow: hidden;
 }
 .game_container{
   margin: 0px;
