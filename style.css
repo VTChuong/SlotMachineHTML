@@ -99,17 +99,11 @@ transition: transform 1s;
 transition-delay: 2s;
 }
 .item.state4 {
-/* transform: rotateX(135deg);
-transition: transform 1s;
-transition-delay: 2s; */
 transform: rotateX(315deg);
 transition: transform 1s;
 transition-delay: 2s;
 }
 .item.state5 {
-/* transform: rotateX(180deg);
-transition: transform 1s;
-transition-delay: 2s; */
 transform: rotateX(270deg);
 transition: transform 1s;
 transition-delay: 2s; 
@@ -120,17 +114,11 @@ transition: transform 1s;
 transition-delay: 2s;
 }
 .item.state7 {
-/* transform: rotateX(270deg);
-transition: transform 1s;
-transition-delay: 2s; */
 transform: rotateX(135deg);
 transition: transform 1s;
 transition-delay: 2s;
 }
 .item.state8 {
-/* transform: rotateX(315deg);
-transition: transform 1s;
-transition-delay: 2s; */
 transform: rotateX(180deg);
 transition: transform 1s;
 transition-delay: 2s;
