@@ -7,6 +7,7 @@ body  {
   overflow: hidden;
 }
 .game_container{
+  display: none;
   margin: 0px;
   width: 1530px;
   /* height: 100%; */
@@ -66,6 +67,7 @@ body  {
   z-index: 200;
     position: absolute;
     z-index: 200;
+    display: none;
 
 }
 .winning{
@@ -76,6 +78,7 @@ body  {
   background: url("./img/$$$.jpg");
 }
 .winningLabel{
+  display: none;
   text-transform: uppercase;
     text-align: center;
     color: #ccab44;
@@ -211,6 +214,7 @@ video{
   width: 245px;
 }
 .finalImage{
+  cursor: pointer;
   display: none;
   position: absolute;
   z-index: 999;
