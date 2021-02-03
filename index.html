@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Slot Machine</title>
+  <title>Las Vegas</title>
   <link rel="stylesheet" href="./style.css">
 
 </head>
@@ -63,7 +63,7 @@
           ["brunettes-1", "brunettes-2", "brunettes-3"],
           ["busty-1", "busty-2", "busty-3"],
           ["teens-1", "teens-2", "teens-3"]],
-        // allImages = ["img1-1", "img2-2", "img3-3", "img4-4", "img5-5", "img6-6", "img7-7", "img8-8", "img9-9", "img10-10", "img11-11", "img12-12", "img13-13", "img14-14", "img15-15", "img16-16", "img17-17", "img18-18",],
+        
         tempImages = allImages.slice(),
         currentImages = [],
         salute = $(".salute"),
@@ -76,12 +76,22 @@
         stateNo = null
       reset()
       $(".label").html(currentImages[0].split("-")[0])
+      for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+          if (j != 0) slotsItem.eq(i).children().eq(j).addClass("hide")
+        }
+      }
       function reset() {
         isWin = Math.floor(Math.random() * 10) < level ? true : false
         currentImages = []
         winNums = []
         wonKind = null
         tempImages = allImages.slice()
+        for (i = 0; i < 8; i++) {
+          for (j = 0; j < 8; j++) {
+            slotsItem.eq(i).children().eq(j).removeClass("hide")
+          }
+        }
 
         for (i = tempImages.length - 1; i >= 0; i--) {
           randomNum = Math.floor(Math.random() * tempImages.length)
@@ -93,20 +103,20 @@
 
         for (j = 0; j < 3; j++) {
           if (isWin) {
-            winNums[j] = Math.floor(Math.random() * allImages[wonKind].length) 
+            winNums[j] = Math.floor(Math.random() * allImages[wonKind].length)
           } else {
-            winNums[j] = Math.floor(Math.random() * currentImages.length) 
-            if (j == 2 
-            && currentImages[winNums[0]].split("-")[0] == currentImages[winNums[1]].split("-")[0] 
-            && currentImages[winNums[0]].split("-")[0] == currentImages[winNums[2]].split("-")[0]) {
+            winNums[j] = Math.floor(Math.random() * currentImages.length)
+            if (j == 2
+              && currentImages[winNums[0]].split("-")[0] == currentImages[winNums[1]].split("-")[0]
+              && currentImages[winNums[0]].split("-")[0] == currentImages[winNums[2]].split("-")[0]) {
               var difName = currentImages.find(function (n) {
                 return n.split("-")[0] != currentImages[winNums[0]].split("-")[0]
               })
-              winNums[j] = currentImages.indexOf(difName) 
+              winNums[j] = currentImages.indexOf(difName)
             }
           }
         }
-       
+
         setTimeout(() => { //change images
           for (var i = 0; i < 3; i++) {
             slotsItem = $(".slots .item")
@@ -115,15 +125,15 @@
             }
           }
         }, 1000);
-        console.log("win:",isWin,"winNums", winNums, "currentImages", currentImages)
+        console.log("win:", isWin, "winNums", winNums, "currentImages", currentImages)
       }
       $(".spin_btn").on("click", function () {
         if (!isAnimate) {
           for (var i = 0; i < 3; i++) {
-            stateNo = winNums[i]+1
+            stateNo = winNums[i] + 1
             slotsItem.eq(i).removeClass('state' + stateNo);
           }
-          
+
           start.play()
           $("#btnHover").addClass("hide");
           $(".winningContainer").hide()
@@ -138,11 +148,16 @@
           $(this).addClass("active");
           reset()
           for (var i = 0; i < 3; i++) { //set RS
-            stateNo = winNums[i]+1
+            stateNo = winNums[i] + 1
             slotsItem.eq(i).addClass("animate").addClass('state' + stateNo);
           }
 
           setTimeout(function () {
+            for (i = 0; i < 8; i++) {
+              for (j = 0; j < 8; j++) {
+                if (winNums[i] != j) slotsItem.eq(i).children().eq(j).addClass("hide")
+              }
+            }
             if (isWin) {
               winAudio.play()
               name = currentImages[winNums[0]].split('-')[0]
@@ -171,9 +186,6 @@
 //the video runs for 13 seconds then fades to the slot site attached is the Blondes thats the first after
 //the video then whatever you choose TEENS, BUSTY, ASIANS then the $$$ then see the attached 
 //WE TURN FANTASY INTO REALITY to include money@lasvegas.xxx just the words as I have not purchased the email yet.
-
-
-
   </script>
 
 </body>
