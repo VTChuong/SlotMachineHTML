@@ -9,7 +9,7 @@
 </head>
 
 <body>
- 
+
   <div class="game_container">
     <div class="mask">
       <div class="winningContainer" style="z-index: 200;">
@@ -40,16 +40,11 @@
       $(".winningContainer").hide()
       $(".winningLabel").hide()
       $("#btnHover").removeClass("hide");
-      var vid = $("#myVideo")[0]
-
-      vid.addEventListener("canplay", function() {
-        console.log("vid plays")
-        vid.removeAttribute("controls")
-        setTimeout(() => {
-          $("video").fadeOut(2000)
-          $(".game_container").fadeIn(3000)
-        }, 13000);
-      }, false);
+      
+      $("#myVideo").on('ended', function () {
+        $("video").fadeOut(500)
+        $(".game_container").fadeIn(1000)
+      });
       var slots = $(".slots")
       for (var i = 0; i < 3; i++) {
         slots.append("<div class='item'>")
@@ -81,10 +76,10 @@
         lose = new Audio("./audio/lose.mp3"),
         winAudio = new Audio("./audio/win.mp3"),
         stateNo = null;
-       
-        start.preload = "auto"
-        lose.preload = "auto"
-        winAudio.preload = "auto"
+
+      start.preload = "auto"
+      lose.preload = "auto"
+      winAudio.preload = "auto"
       reset()
       $(".label").html(currentImages[0].split("-")[0])
       for (i = 0; i < 8; i++) {
